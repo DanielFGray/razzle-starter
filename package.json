@@ -14,8 +14,11 @@
     "fix:js": "run-p 'lint:js --fix'"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.19",
+    "apollo-server-express": "^2.24.1",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
+    "graphql": "^15.5.0",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
