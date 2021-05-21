@@ -8,7 +8,10 @@
     "start": "run-p start:*",
     "build": "tsc -b && razzle build",
     "test": "razzle test --env=jsdom",
-    "run:prod": "NODE_ENV=production node build/server.js"
+    "run:prod": "NODE_ENV=production node build/server.js",
+    "lint:js": "eslint --ext=.js,.ts,.jsx,.tsx src",
+    "lint": "run-p -c lint:*",
+    "fix:js": "run-p 'lint:js --fix'"
   },
   "dependencies": {
     "express": "^4.17.1",
