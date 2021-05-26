@@ -15,15 +15,19 @@ if (! RAZZLE_ASSETS_MANIFEST) throw new ReferenceError('undefined env var RAZZLE
 const assets: Assets = JSON.parse(fs.readFileSync(RAZZLE_ASSETS_MANIFEST, 'utf8'))
 
 function cssLinksFromAssets(entrypoint: string) {
-  return assets[entrypoint]?.css
-    ?.map(asset => `<link rel="stylesheet" href="${asset}" type="text/css">`)
-    .join('') ?? ''
+  return (
+    assets[entrypoint]?.css
+      ?.map(asset => `<link rel="stylesheet" href="${asset}" type="text/css">`)
+      .join('') ?? ''
+  )
 }
 
 function jsScriptTagsFromAssets(entrypoint: string, extra = '') {
-  return assets[entrypoint]?.js
-    ?.map(asset => `<script src="${asset}" type="text/javascript"${extra}></script>`)
-    .join('') ?? ''
+  return (
+    assets[entrypoint]?.js
+      ?.map(asset => `<script src="${asset}" type="text/javascript"${extra}></script>`)
+      .join('') ?? ''
+  )
 }
 
 export function render(
@@ -39,8 +43,7 @@ export function render(
       type: 'redirect'
       status: number
       redirect: string
-    }
-  {
+    } {
   const routerCtx: StaticRouterContext = {}
   const helmetCtx = {}
   const status = 200
