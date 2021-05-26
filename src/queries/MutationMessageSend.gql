@@ -1,0 +1,7 @@
+mutation MessageSend($message: MessageSendInput) {
+  MessageSend(message: $message) {
+    code
+    success
+    message
+  }
+}

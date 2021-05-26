@@ -5,6 +5,7 @@
   "scripts": {
     "start:tsc": "tsc -b -w --preserveWatchOutput",
     "start:razzle": "razzle start",
+    "start:gqlgen": "graphql-codegen -w",
     "start": "run-p start:*",
     "build": "tsc -b && razzle build",
     "test": "razzle test --env=jsdom",
@@ -17,8 +18,8 @@
     "@apollo/client": "^3.3.19",
     "apollo-server-express": "^2.24.1",
     "express": "^4.17.1",
-    "morgan": "^1.10.0",
     "graphql": "^15.5.0",
+    "morgan": "^1.10.0",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -27,6 +28,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
+    "@graphql-codegen/add": "^2.0.2",
+    "@graphql-codegen/cli": "^1.21.5",
+    "@graphql-codegen/typescript": "^1.22.1",
+    "@graphql-codegen/typescript-operations": "^1.18.0",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.5",
+    "@graphql-codegen/typescript-resolvers": "^1.19.2",
     "@testing-library/dom": "^7.29.4",
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^11.2.7",
@@ -53,6 +60,7 @@
     "prettier": "^2.3.0",
     "razzle": "^4.0.4",
     "razzle-dev-utils": "^4.0.4",
+    "razzle-plugin-graphql": "^4.0.4",
     "typescript": "^4.3.2",
     "webpack": "^5.37.1",
     "webpack-dev-server": "^3.11.2"

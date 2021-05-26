@@ -1,0 +1,30 @@
+type Message {
+  body: String!
+  title: String
+}
+
+interface MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+}
+
+type MessageSendMutationResponse implements MutationResponse {
+  code: String!
+  success: Boolean!
+  message: String!
+}
+
+type Query {
+  MessageList: [Message]!
+}
+
+input MessageSendInput {
+  body: String!
+  title: String
+}
+
+type Mutation {
+  MessageSend(message: MessageSendInput): MessageSendMutationResponse
+}
+

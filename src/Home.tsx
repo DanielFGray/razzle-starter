@@ -1,32 +1,44 @@
-import React from 'react'
-import logo from './react.svg'
+import React, { useState } from 'react'
+import { Message, useMessageListQuery, useMessageSendMutation } from './generated-types'
 
-import './Home.css'
-
-function Home() {
+export default function Home(): JSX.Element {
+  const messageListQuery = useMessageListQuery()
+  const [messageSend, messageSendMutation] = useMessageSendMutation()
+  const [debug, setDebug] = useState<unknown>(null)
   return (
     <div className="Home">
-      <div className="Home-header">
-        <img src={logo} className="Home-logo" alt="logo" />
-        <h2>Welcome to Razzle</h2>
-      </div>
-      <p className="Home-intro">
-        To get started, edit <code>src/App.tsx</code> or{' '}
-        <code>src/Home.tsx</code> and save to reload.
-      </p>
-      <ul className="Home-resources">
-        <li>
-          <a href="https://github.com/jaredpalmer/razzle">Docs</a>
-        </li>
-        <li>
-          <a href="https://github.com/jaredpalmer/razzle/issues">Issues</a>
-        </li>
-        <li>
-          <a href="https://palmer.chat">Community Slack</a>
-        </li>
-      </ul>
+      {debug && <pre>{JSON.stringify(debug, null, 2)}</pre>}
+      <form
+        onSubmit={async event => {
+          event.preventDefault()
+          const formdata = Object.fromEntries(
+            new FormData(event.target as HTMLFormElement).entries(),
+          )
+          const sendResult = await messageSend({ variables: { message: formdata as Message } })
+          setDebug(sendResult)
+        }}
+      >
+        <fieldset>
+          <legend>send message</legend>
+          <div>
+            <label>
+              <span>title:</span>
+              <input type="text" name="title" />
+            </label>
+          </div>
+          <div>
+            <label>
+              <span>message:</span>
+              <textarea name="body" />
+            </label>
+          </div>
+          <div>
+            <input type="submit" value="send" />
+          </div>
+        </fieldset>
+      </form>
+      <pre>{JSON.stringify(messageListQuery, null, 2)}</pre>
+      {messageSendMutation.error && <pre>{JSON.stringify(messageSendMutation.error, null, 2)}</pre>}
     </div>
   )
 }
-
-export default Home
