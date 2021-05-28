@@ -19,6 +19,6 @@ generates:
       withHOC: false
       withHooks: true
       withMutationFn: true
-# hooks:
-#   afterOneFileWrite:
-#     - prettier './src/generated-types.ts' --write
+hooks:
+  afterOneFileWrite:
+    - prettier './src/generated-types.ts' --write

@@ -7,6 +7,7 @@ type ApolloContext = {
   session: null
 }
 
+let messageIdx = 0
 const messages: Message[] = []
 
 const resolvers: Resolvers<ApolloContext> = {
@@ -17,26 +18,15 @@ const resolvers: Resolvers<ApolloContext> = {
   },
   Mutation: {
     MessageSend(_parent, variables, _context) {
-      try {
-        if (! variables?.message) throw new GraphQLError('missing message field')
-        messages.push(variables.message)
-        return { code: '200', success: true, message: 'added' }
-      } catch (e) {
-        return { code: '400', success: false, message: e?.message as string }
-      }
-    },
-  },
-  MutationResponse: {
-    __resolveType(_mutationResponse, _context, _info) {
-      return null
+      if (! variables?.message) throw new GraphQLError('missing message field')
+      const message = {...variables.message, id: messageIdx++, createdAt: new Date().toISOString()}
+      messages.unshift(message)
+      return message
     },
   },
 }
 
-export const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-})
+export const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 export const apolloServer = new ApolloServer({
   schema,

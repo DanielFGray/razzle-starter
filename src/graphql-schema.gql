@@ -1,22 +1,9 @@
 type Message {
+  id: Int!
   body: String!
   title: String
-}
-
-interface MutationResponse {
-  code: String!
-  success: Boolean!
-  message: String!
-}
-
-type MessageSendMutationResponse implements MutationResponse {
-  code: String!
-  success: Boolean!
-  message: String!
-}
-
-type Query {
-  MessageList: [Message]!
+  user: String
+  createdAt: String!
 }
 
 input MessageSendInput {
@@ -24,7 +11,10 @@ input MessageSendInput {
   title: String
 }
 
-type Mutation {
-  MessageSend(message: MessageSendInput): MessageSendMutationResponse
+type Query {
+  MessageList: [Message!]!
 }
 
+type Mutation {
+  MessageSend(message: MessageSendInput): Message
+}

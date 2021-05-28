@@ -9,7 +9,7 @@ import { ApolloLink } from '@apollo/client/link/core'
 import { onError } from '@apollo/client/link/error'
 import { SchemaLink } from '@apollo/client/link/schema'
 import { ApolloProvider } from '@apollo/client/react'
-import {getDataFromTree} from '@apollo/client/react/ssr'
+import { getDataFromTree } from '@apollo/client/react/ssr'
 import App from './App'
 import { schema } from './apolloServer'
 
@@ -18,11 +18,8 @@ interface Assets {
 }
 
 const RAZZLE_ASSETS_MANIFEST = process.env.RAZZLE_ASSETS_MANIFEST
-if (!RAZZLE_ASSETS_MANIFEST)
-  throw new ReferenceError('undefined env var RAZZLE_ASSETS_MANIFEST')
-const assets: Assets = JSON.parse(
-  fs.readFileSync(RAZZLE_ASSETS_MANIFEST, 'utf8'),
-)
+if (! RAZZLE_ASSETS_MANIFEST) throw new ReferenceError('undefined env var RAZZLE_ASSETS_MANIFEST')
+const assets: Assets = JSON.parse(fs.readFileSync(RAZZLE_ASSETS_MANIFEST, 'utf8'))
 
 function cssLinksFromAssets(entrypoint: string) {
   return (

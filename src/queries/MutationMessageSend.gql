@@ -1,7 +1,5 @@
-mutation MessageSend($message: MessageSendInput) {
+mutation MessageSend($message: MessageSendInput!) {
   MessageSend(message: $message) {
-    code
-    success
-    message
+    ...MessageFields
   }
 }

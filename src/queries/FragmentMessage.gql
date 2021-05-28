@@ -1,0 +1,6 @@
+fragment MessageFields on Message {
+  id
+  title
+  body
+  createdAt
+}

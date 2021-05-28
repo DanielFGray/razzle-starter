@@ -1,6 +1,5 @@
 query MessageList {
   MessageList {
-    title
-    body
+    ...MessageFields
   }
 }
